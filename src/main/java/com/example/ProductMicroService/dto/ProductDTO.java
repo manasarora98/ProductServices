@@ -7,12 +7,11 @@ import java.util.Map;
 @Getter
 @Setter
 public class ProductDTO {
-    Integer productId;
+    String productId;
     Integer categoryId;
     String name;
     String description;
     Map<String,String> productAttributes;
-    int totalStock;
     int productRating;
     int noOfSoldUnits;
     String imageUrl;

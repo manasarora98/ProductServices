@@ -12,12 +12,11 @@ import java.util.Map;
 @Document(collection = "Product")
 public class ProductEntity {
     @Id
-    Integer productId;
+    String productId;
     Integer categoryId;
     String name;
     String description;
     Map<String,String> productAttributes;
-    int totalStock;
     int productRating;
     int noOfSoldUnits;
     String imageUrl;
