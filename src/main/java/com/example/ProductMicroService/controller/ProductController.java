@@ -47,8 +47,9 @@ public class ProductController {
             BeanUtils.copyProperties(productEntity, productDTO);
             productDTOList.add(productDTO);
         }
-        return (List<ProductDTO>) new ResponseEntity<List<ProductDTO>>(productDTOList,HttpStatus.CREATED);
+        return productDTOList;
     }
+
 
    // @GetMapping(value = "/")
 
