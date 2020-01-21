@@ -10,8 +10,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "Category")
 public class CategoryEntity {
     @Id
-    int categoryId;
-    int categoryName;
+    String categoryId;
+    String categoryName;
 
 
 }
