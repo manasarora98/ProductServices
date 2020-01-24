@@ -8,9 +8,12 @@ import com.example.ProductMicroService.repository.ProductRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -57,8 +60,8 @@ public class ProductServicesImpl implements ProductServices{
     }
 
     @Override
-    public List<ProductEntity> getProductsByCategory(Integer categoryId){
-        return productRepository.findAllByCategoryId(categoryId);
+    public Page<ProductEntity> getProductsByCategory(Integer categoryId, PageRequest pageRequest){
+        return productRepository.findAllByCategoryId(categoryId,pageRequest);
 
     }
 
@@ -94,14 +97,27 @@ public class ProductServicesImpl implements ProductServices{
     }
 
     @Override
-    public String getNamesFeign(String productId) {
+    public List<String> getNamesFeign(List<String> productIds) {
+        List<String> names = new ArrayList<>();
+        for (String productId:productIds) {
+            Optional<ProductEntity> productEntity = productRepository.findById(productId);
+            names.add((productEntity.get()).getName());
+            System.out.println((productEntity.get()).getName());
+        }
 
-        Optional<ProductEntity> productEntity = productRepository.findById(productId);
-        return productEntity.get().getName();
+        return names;
 
     }
 
-
-
-
+    @Transactional
+    @Override
+    public void setProductRating(String productId, double rating) {
+        Optional<ProductEntity> optionalProductEntity = productRepository.findById(productId);
+        ProductEntity productEntity = new ProductEntity();
+        if (optionalProductEntity.isPresent()) {
+            productEntity = optionalProductEntity.get();
+            productEntity.setProductRating(rating);
+        }
+        productRepository.save(productEntity);
+    }
 }

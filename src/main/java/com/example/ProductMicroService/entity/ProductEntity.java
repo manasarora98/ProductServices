@@ -6,6 +6,7 @@ import net.minidev.json.JSONObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
 import java.util.Map;
 @Getter
 @Setter
@@ -17,8 +18,9 @@ public class ProductEntity {
     String name;
     String description;
     Map<String,String> productAttributes;
-    int productRating;
+    double productRating;
     int noOfSoldUnits;
     String imageUrl;
+
 
 }
