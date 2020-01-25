@@ -27,7 +27,7 @@ public class ProductController {
     CategoryServices categoryServices;
 
     @PostMapping(value = "/createProduct")
-    public void createProduct(@RequestBody JointDTO jointDTO) {
+    public boolean createProduct(@RequestBody JointDTO jointDTO) {
         log.info("Request received : {}", jointDTO);
         ProductDTO productDTO = new ProductDTO();
         ProductListDTO productListDTO = new ProductListDTO();
@@ -50,6 +50,7 @@ public class ProductController {
         BeanUtils.copyProperties(productDTO, productEntity);
 
         ProductEntity productEntityCreated = productServices.createProducts(productEntity, productListDTO);
+        return true;
 
     }
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-@FeignClient(value = "merchantFeign", url = "http://172.16.20.131:8085/")
+@FeignClient(value = "merchantFeign", url = "http://172.16.20.131:8090/")
 public interface MerchantFeign {
 
     @RequestMapping(method = RequestMethod.POST, value = "productList/addProduct")

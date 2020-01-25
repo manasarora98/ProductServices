@@ -101,8 +101,10 @@ public class ProductServicesImpl implements ProductServices{
         List<String> names = new ArrayList<>();
         for (String productId:productIds) {
             Optional<ProductEntity> productEntity = productRepository.findById(productId);
-            names.add((productEntity.get()).getName());
-            System.out.println((productEntity.get()).getName());
+            if (productEntity.isPresent()) {
+                names.add((productEntity.get()).getName());
+                System.out.println((productEntity.get()).getName());
+            }
         }
 
         return names;
