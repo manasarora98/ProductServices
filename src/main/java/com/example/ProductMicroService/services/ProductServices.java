@@ -29,4 +29,5 @@ public interface ProductServices {
     void setProductRating(String productId,double rating);
 
 
+    void removeProduct(String productId);
 }

@@ -104,6 +104,13 @@ public class ProductController {
         return true;
     }
 
+    @PostMapping(value="/removeProduct/{productId}")
+    public boolean removeProduct(@PathVariable("productId") String productId){
+        productServices.removeProduct(productId);
+        return true;
+    }
+
+
 
 
 

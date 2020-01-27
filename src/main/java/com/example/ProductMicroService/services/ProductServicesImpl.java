@@ -88,9 +88,11 @@ public class ProductServicesImpl implements ProductServices{
             Optional<ProductEntity> productEntity = productRepository.findById(id);
 //            BeanUtils.copyProperties(productEntity,productDTO);
 //
-            ProductEntity productEntity1=productEntity.get();
-            BeanUtils.copyProperties(productEntity1,productDTO);
-            list.add(productDTO);
+            if (productEntity.isPresent()) {
+                ProductEntity productEntity1 = productEntity.get();
+                BeanUtils.copyProperties(productEntity1, productDTO);
+                list.add(productDTO);
+            }
         }
 
         return list;
@@ -121,5 +123,11 @@ public class ProductServicesImpl implements ProductServices{
             productEntity.setProductRating(rating);
         }
         productRepository.save(productEntity);
+    }
+
+    @Override
+    @Transactional
+    public void removeProduct(String productId) {
+        productRepository.deleteById(productId);
     }
 }
